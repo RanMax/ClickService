@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Created by Максим on 26.03.2016.
@@ -8,19 +10,23 @@ public class ClickService {
         System.out.println("HelloWorld");
         Point startPoint = new Point(338,134);
 
-        Point p1 = new Point(195,207);
-        Point p2 = new Point(255,330);
-        Point p3 = new Point(245,452);
-
         try {
-            Robot r = new Robot();
-            r.mouseMove(338, 134);
             UserRobot ur = new UserRobot();
-            ur.mouse1Press(338,134);
-            ur.input("MIELE ААА ремонт стиральных машин miele");
+            ur.start();
+            Robot r = new Robot();
+            /*
+            ur.mouseMove(338, 134);
 
-            ur.sleep(5000);
-            r.mouseMove(200,300);
+            ur.mouse1Press(338,134);
+            ur.input("miele aaa ремонт стиральных машин miele");
+            ur.inputChar(KeyEvent.VK_ENTER); //13.Enter
+            //ur.input("ABCDEFGHIJKLMNOPQRSTYVWXYZ");
+
+            for (Point p: points){
+                ur.sleep(1000);
+                ur.open(p);
+            }
+
 
             while (true){
                 Point location = MouseInfo.getPointerInfo().getLocation();
@@ -30,6 +36,8 @@ public class ClickService {
                 System.out.println("y = " + y);
                 ur.sleep(1000);
             }
+            */
+
 
         } catch (Exception ex){
             ex.printStackTrace();
