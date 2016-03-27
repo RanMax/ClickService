@@ -4,6 +4,7 @@ import org.jsoup.nodes.Element;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -23,6 +24,7 @@ public class UserRobot {
     HashSet<Character> engSum = new HashSet<Character>();
     HashMap<Character,Character> rusMap;
     HashMap<Character,Integer> engMap;
+    public int timeout = 500;
 
     public UserRobot(){
         this.engSum = new HashSet<Character>();
@@ -144,6 +146,19 @@ public class UserRobot {
         engMap.put('Z',90);
     }
 
+    public void changeInput(){
+        try {
+            Robot r = new Robot();
+            r.keyPress(18);
+            r.keyPress(16);
+            Thread.sleep(5);
+            r.keyRelease(16);
+            r.keyRelease(18);
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
     public void clearText(){
         try {
             Robot r = new Robot();
@@ -160,6 +175,19 @@ public class UserRobot {
             ex.printStackTrace();
         }
 
+    }
+
+    public void closeTab(){
+        try {
+            Robot r = new Robot();
+            r.keyPress(KeyEvent.VK_CONTROL);
+            sleep(this.timeout);
+            r.keyPress(KeyEvent.VK_W);
+            r.keyRelease(KeyEvent.VK_CONTROL);
+            r.keyRelease(KeyEvent.VK_W);
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public int getCode(char symbol, int code){
@@ -188,9 +216,77 @@ public class UserRobot {
 
     public ArrayList<String> getQueries(){
         ArrayList<String> ret = new ArrayList<String>();
-        ret.add("РЕМОНТ ЗАПЧАСТЕЙ MIELE");
+        ret.add("МИЛИ РЕМОНТ");
+        ret.add("МИЛИ СЕРВИС");
+        ret.add("MIELE ДИАГНОСТИКА");
+        ret.add("MIELE ОФИЦИАЛЬНЫЙ САЙТ РЕМОНТ");
+        ret.add("MIELE ОШИБКА ПОДАЧИ ВОДЫ");
+        ret.add("MIELE РЕМОНТ");
+        ret.add("MIELE РЕМОНТ БЫТОВОЙ ТЕХНИКИ");
+        ret.add("MIELE РЕМОНТ МОСКВА");
+        ret.add("MIELE СЕРВИС");
+        ret.add("MIELE СЕРВИСНЫЙ ЦЕНТР");
+        ret.add("MIELE СЕРВИСНЫЙ ЦЕНТР МОСКВА");
+        ret.add("MIELE СЛОМАЛАСЬ");
+        ret.add("MIELE СРОЧНЫЙ РЕМОНТ");
+        ret.add("MILELE РЕМОНТ");
+        ret.add("SERVICE MIELE");
+        ret.add("WATERPROOF MIELE");
+        ret.add("ЗАПЧАСТИ MIELE");
+        ret.add("ЗАПЧАСТИ ДЛЯ СТИРАЛЬНЫХ МАШИН MIELE");
+        ret.add("ЗАПЧАСТИ ДЛЯ СТИРАЛЬНЫХ МАШИН МИЛЕ");
+        ret.add("ЗАПЧАСТИ МИЛЕ");
+        ret.add("МИЕЛЕ РЕМОНТ");
+        ret.add("МИЕЛЕ СЕРВИС");
+        ret.add("МИЕЛЕ СЕРВИСНЫЙ ЦЕНТР МИЛЕ");
+        ret.add("МИЕЛЕ СЛОМАЛАСЬ");
+        ret.add("МИЕЛЕ СРОЧНЫЙ РЕМОНТ");
+        ret.add("МИЛЕ РЕМОНТ");
+        ret.add("МИЛЕ СЕРВИС");
+        ret.add("МИЛЕ СЕРВИС ЦЕНТР");
+        ret.add("МИЛЕ СЕРВИСНЫЙ ЦЕНТР");
+
+        ret.add("МИЛЕ СРОЧНЫЙ РЕМОНТ");
+        ret.add("МИЛИ ДИАГНОСТИКА");
+        ret.add("МИЛИ СЛОМАЛАСЬ");
+        ret.add("МИЛЛ СЕРВИС");
+        ret.add("МИЛЛИ ДИАГНОСТИКА");
+        ret.add("МИЛЛИ СЕРВИСНЫЙ ЦЕНТР");
+        ret.add("ОШИБКА WATERPROOF MIELE");
+        ret.add("ОШИБКА СЛИВА ВОДЫ MIELE");
+        ret.add("ПОДКЛЮЧЕНИЕ СТИРАЛЬНОЙ МАШИНЫ MIELE");
+        ret.add("РЕМОНТ MIELE В МОСКВЕ");
+        ret.add("РЕМОНТ БЫТОВОЙ ТЕХНИКИ МИЛЕ");
+        ret.add("РЕМОНТ ВЫТЯЖЕК MIELE");
+        ret.add("РЕМОНТ КОФЕМАШИН MIELE");
+        ret.add("РЕМОНТ МАШИН MIELE");
+        ret.add("РЕМОНТ МИЛЛЕ");
+        ret.add("РЕМОНТ МИЛЛИ");
+        ret.add("РЕМОНТ ПОСУДОМОЕЧНЫХ МАШИН MIELE");
+        ret.add("РЕМОНТ ПОСУДОМОЕЧНЫХ МАШИН МИЛЕ");
+        ret.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЛЕ");
+        ret.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЛИ");
+        ret.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН MIELE");
+        ret.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЕЛЕ");
+        ret.add("РЕМОНТ СУШИЛЬНЫХ МАШИН MIELE");
+        ret.add("РЕМОНТ ТЕХНИКИ MIELE");
+        ret.add("РЕМОНТ ТЕХНИКИ МИЛЕ");
         ret.add("СЕРВИС MIELE В МОСКВЕ");
-        ret.add("ОФИЦИАЛЬНЫЙ СЕРВИСНЫЙ ЦЕНТР MIELE");
+        ret.add("СЕРВИС МИЕЛЕ В МОСКВЕ");
+        ret.add("СЕРВИС МИЛЕ В МОСКВЕ");
+        ret.add("СЕРВИС МИЛЛЕ");
+        ret.add("СЕРВИС ЦЕНТР MIELE");
+        ret.add("СЕРВИС ЦЕНТР МИЛЕ В МОСКВЕ");
+        ret.add("СЕРВИСНАЯ СЛУЖБА MIELE");
+        ret.add("СЕРВИСНАЯ СЛУЖБА МИЕЛЕ");
+        ret.add("СЕРВИСНАЯ СЛУЖБА МИЛЛИ");
+        ret.add("СТИРАЛЬНАЯ МАШИНА MIELE ОШИБКА WATERPROOF");
+        ret.add("СТИРАЛЬНАЯ МАШИНА MIELE ОШИБКА СЛИВ ВОДЫ");
+        ret.add("УСТАНОВКА MIELE");
+        ret.add("УСТАНОВКА МИЕЛЕ");
+        ret.add("УСТАНОВКА МИЛЕ");
+        ret.add("УСТАНОВКА МИЛИ");
+
         return ret;
     }
 
@@ -238,18 +334,7 @@ public class UserRobot {
         }
     }
 
-    public void changeInput(){
-        try {
-            Robot r = new Robot();
-            r.keyPress(18);
-            r.keyPress(16);
-            Thread.sleep(5);
-            r.keyRelease(16);
-            r.keyRelease(18);
-        } catch(Exception ex){
-            ex.printStackTrace();
-        }
-    }
+
 
     public void mouse1Press(int x, int y){
         try {
@@ -280,33 +365,70 @@ public class UserRobot {
         }
     }
 
+    public void newTab(){
+        setClipboard("https://yandex.ru/search/?text=");
+        try {
+            Robot r = new Robot();
+            r.keyPress(KeyEvent.VK_CONTROL);
+            sleep(this.timeout);
+            r.keyPress(KeyEvent.VK_T);
+            r.keyRelease(KeyEvent.VK_CONTROL);
+            r.keyRelease(KeyEvent.VK_T);
+            sleep(2*this.timeout);
+            mouseMove(256,60);
+            openAndTransfer(new Point(256,60));
+            sleep(this.timeout);
+            r.keyPress(KeyEvent.VK_CONTROL);
+            sleep(this.timeout);
+            r.keyPress(KeyEvent.VK_V);
+            r.keyRelease(KeyEvent.VK_CONTROL);
+            r.keyRelease(KeyEvent.VK_V);
+
+            r.keyPress(KeyEvent.VK_ENTER);
+            r.keyRelease(KeyEvent.VK_ENTER);
+            sleep(6*this.timeout);
+
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
     public void open(Point point){
         mouseMove(point.x, point.y);
-        sleep(500);
+        sleep(this.timeout);
         mousePress(point.x, point.y, InputEvent.BUTTON3_MASK);
-        sleep(500);
+        sleep(this.timeout);
         mouseMove(point.x+10, point.y+10);
         mousePress(point.x+10, point.y+10, InputEvent.BUTTON1_MASK);
     }
 
+    public void openAndTransfer(Point point){
+        mouseMove(point.x, point.y);
+        sleep(this.timeout);
+        mousePress(point.x, point.y, InputEvent.BUTTON1_MASK);
+    }
+
     public ArrayList<Point> getPoints(String query){
         Point[] points = new Point[4];
-        points[0]=new Point(195,206);
-        points[1]=new Point(255,332);
-        points[2]=new Point(245,455);
-        points[3]=new Point(249,580);
+        points[0]=new Point(230,206);
+        points[1]=new Point(230,332);
+        points[2]=new Point(230,455);
+        points[3]=new Point(230,580);
         ArrayList<Point> ret = new ArrayList<Point>();
         try {
+            String queryText = "https://yandex.ru/search/?text="+query + "&rstr=-1";
             //downloadFiles("https://yandex.ru/search/?text=miele%20aaa%20%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82%20%D1%81%D1%82%D0%B8%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D1%85%20%D0%BC%D0%B0%D1%88%D0%B8%D0%BD%20miele&lr=213&rstr=-1&rnd=82767","e:/direct.html",100);
-            File input = new File("e:/direct2.html");
+            File input = new File("E:\\04_JavaProjects\\ClickService\\temp\\page.html");
             Document doc = Jsoup.parse(input, "utf8", "http://example.com/");
             System.out.println(doc.text());
             int j = 0;
             for (Element mainDiv : doc.select("div[class=serp-list]")) {
                 int i = 0;
-                for (Element div : mainDiv.select("div")) {
+                for (Element div : mainDiv.select("div[class=serp-item serp-adv-item]")) {
                     String text = div.text();
-                    if (j==0 && !text.equals("Сервис MIELE в Москве. / miele-m.ru Рекламаmiele-m.ru Ремонт и сервис, оригинальные комплектующие. Гарантия. Москва и МО. духовые шкафы варочные панели холодильники стиральные машины Контактная информация 8 (800) 333-50-83 пн-вс 9:00-21:00 Ремонт стиральных машин MIELE? / remont-obsluzhivanie.ru Рекламаremont-obsluzhivanie.ru Диагностика = 0 руб. при сложном ремонте. Выезд Москва и МО сразу. Звоните! Гарантия Цены Скидки и акции Заказать выезд мастера Контактная информация +7 (499) 404-20-01 пн-вс 8:00-23:00 Официальный сервисный центр Miele / miele.ru Рекламаmiele.ru Гарантийный и послегарантийный ремонт бытовой техники Miele. Подключение. Заявка Запрос запчастей Ремонт Контакты Контактная информация +7 (495) 745-89-90 пн-пт 8:00-20:00, сб-вс 9:00-19:00 Ремонт Miele («Мили») в Москве | Ремонт бытовой... moscow-miele.ru Сохранённая копияПоказать ещё с сайтаПожаловаться Стоимость ремонта стиральных машин Miele. Вызвать мастера по ремонту техники Miele в Москве. Вы можете вызвать мастера по ремонту бытовой техники Miele в Москве у нас и тем самым - Вы получаете лучший сервис с гарантией высшего... Цены на ремонт стиральных машин Miele » Сервисный... miele-servis.ru›Цены на услуги›Прейскуранте Сохранённая копияПоказать ещё с сайтаПожаловаться Сервисный центр ремонт Miele в Москве. ... Ремонт стиральных машин ВЫЗОВ МАСТЕРА Ремонт бытовой техники Запчасти Установка/подключение Цены на услуги Полезное Контакты Отзывы. Miele-m - Ремонт и сервисное обслуживание miele-m.ru Сохранённая копияПоказать ещё с сайтаПожаловаться Ремонт стиральных машин Miele. ... Если Вам нужен качественный ремонт стиральной машины Miele на дому, обращайтесь в наш СЦ! ... Ежедневно, включая выходные и праздники, 365 дней в году по всей Москве и Московской области. Ремонт стиральных машин Miele | Сервис Miele. +7 495... moscow-servis-miele.ru›Услуги›Ремонт стиральных машин Miele Сохранённая копияПоказать ещё с сайтаПожаловаться Ремонт стиральной машины Miele в Москве Московской области, зависит от профессионализма мастера, какой мастер такой и ремонт. В нашем случаи мы гарантируем Вам, качество, своевременную сдачу работы и чистоту. Ремонт стиральных машин Miele на дому | СЦ МастерБюро masterburo.ru›remont-stiralnyh-mashin/miele/ Сохранённая копияПоказать ещё с сайтаПожаловаться МастерБюро осуществляет ремонт стиральных машин Miele (Миле) любых моделей за пару часов. Наши специалисты выезжают на дом и ремонтируют, не забирая машину в сервис центр. Устранение протечки стиральной машины Miele servis-gold.ru›ustranenie-protechki-stiralnoy-mash Сохранённая копияПоказать ещё с сайтаПожаловаться Итак, течет стиральная машина Miele. Помните - такой ремонт иногда можно сделать своими руками. Сервисный центр Золотые руки - ремонт бытовой техники в Москве и Московской области, диагностика и ремонт стиральных машин, диагностика и... Ремонт стиральных машин Miele / Миле на дому... rembitteh.ru›remont-stiralnyh-mashin-miele/ Сохранённая копияПоказать ещё с сайтаПожаловаться О марке стиральных машин MIELE / Миле: Стиральные машинки Miele (Миле) — это популярная немецкая бытовая техника премиум-класса. ... Мы выезжаем в города Московской области Ремонт стиральных машин Miele в Москве и Московской... ls-servis.ru›miele-stiralnye-mashiny Сохранённая копияПоказать ещё с сайтаПожаловаться Ремонт стиральных машин Miele. Немецкая техника Miele известна сегодня каждому. ... Работаем в Москве и Подмосковье. Ремонт стиральных машин Miele на дому. Выезд мастера... remdial.ru›miele.html Сохранённая копияПоказать ещё с сайтаПожаловаться Miele. Профессиональный ремонт стиральных машин. Работаем ежедневно с 9:00 до 21:00 Выезд специалиста бесплатно Гарантия. ... Москва и МО. Скидки пенсионерам. Ремонт стиральных машин Miele-service miele-servicebt.ru›ремонт-стиральных-машин-miele/ Сохранённая копияПоказать ещё с сайтаПожаловаться Ремонт стиральных машин Miele в Москве и Московской области с выездом на дом к клиентам, к юридическим и физическим лицам тел: 8 (495) ... Если Вам нужен качественный ремонт стиральной машины Miele на дому, обращайтесь в наш СЦ! Ремонт стиральных машин ПОДОЛЬСК! / stiralkin.net Рекламаstiralkin.net Жители города Подольск, Климовск для Вас приятные цены! Вежливые мастера. Контактная информация +7 (968) 492-25-05 пн-вс 9:00-22:00 Ремонт стиральных машин – Сломалась стиральная машина? Рекламаremont-techniki.biz Починим! Ремонт от 800 руб. Звоните! Контактная информация +7 (968) 773-88-48 пн-вс 10:00-21:00 Ремонт стиральных машин Miele / remstirmash24.ru Рекламаremstirmash24.ru Сегодня скидка на ремонт 20%. Выезд мастера за 1 час. Гарантия от 6 мес.. Контактная информация +7 (495) 755-36-60 круглосуточно MIELE ремонт? Выезжаем к Вам! / remontmile.ru Рекламаremontmile.ru Ремонт - через 40 мин после звонка! Диагностика = 0 руб., Сегодня - акция! Гарантия Цены Акции_скидки Заказать_диагностику_бесплатно Контактная информация +7 (499) 346-76-01 пн-вс 8:00-22:00 м. Алтуфьево")){
+                    System.out.println(text);
+
+                    if (j==0 && !text.contains("miele-m.ru") && !text.contains("miele-servicebt.ru")){
                         if (i < 4) {
                             ret.add(points[i]);
                             System.out.println("Add point " + i);
@@ -358,10 +480,51 @@ public class UserRobot {
         }
     }
 
+    public void savePage(){
+        setClipboard("page.html");
+        try {
+            Robot r = new Robot();
+            r.keyPress(KeyEvent.VK_CONTROL);
+            sleep(this.timeout);
+            r.keyPress(KeyEvent.VK_S);
+            r.keyRelease(KeyEvent.VK_CONTROL);
+            r.keyRelease(KeyEvent.VK_S);
+            sleep(2*this.timeout);
+
+            r.keyPress(KeyEvent.VK_CONTROL);
+            sleep(this.timeout);
+            r.keyPress(KeyEvent.VK_V);
+            r.keyRelease(KeyEvent.VK_CONTROL);
+            r.keyRelease(KeyEvent.VK_V);
+
+            r.keyPress(KeyEvent.VK_ENTER);
+            r.keyRelease(KeyEvent.VK_ENTER);
+            sleep(this.timeout);
+
+            r.keyPress(KeyEvent.VK_LEFT);
+            r.keyRelease(KeyEvent.VK_LEFT);
+
+            r.keyPress(KeyEvent.VK_ENTER);
+            r.keyRelease(KeyEvent.VK_ENTER);
+
+
+
+            sleep(2*this.timeout);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public void setClipboard(String str) {
+        StringSelection ss = new StringSelection(str);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+    }
+
 
 
     public void start(){
         ArrayList<String> queries = getQueries();
+        int j = 0;
         for (String query: queries){
             mouseMove(338, 134);
             mouse1Press(338, 134);
@@ -369,11 +532,22 @@ public class UserRobot {
             input(query);
             inputChar(KeyEvent.VK_ENTER); //13.Enter
             //ur.input("ABCDEFGHIJKLMNOPQRSTYVWXYZ");
-
+            sleep(10*this.timeout);
+            savePage();
             ArrayList<Point> points = getPoints(query);
-            for (Point p: points){
-                sleep(1000);
-                open(p);
+
+                for (Point p: points){
+                sleep(2*this.timeout);
+                //open(p);
+                openAndTransfer(p);
+                sleep(8*this.timeout);
+                closeTab();
+                sleep(4*this.timeout);
+            }
+            j++;
+            if (j > 3) {
+                newTab();
+                j = 0;
             }
 
         }
