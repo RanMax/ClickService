@@ -12,7 +12,7 @@ public class MousePosition {
             double y = location.getY();
             System.out.println("x = " + x);
             System.out.println("y = " + y);
-            ur.sleep(1000);
+            ur.sleep(1);
         }
     }
 }

@@ -12,10 +12,7 @@ import java.net.URL;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Created by Максим on 26.03.2016.
@@ -25,6 +22,7 @@ public class UserRobot {
     HashMap<Character,Character> rusMap;
     HashMap<Character,Integer> engMap;
     public int timeout = 500;
+    public int encode = 0;
 
     public UserRobot(){
         this.engSum = new HashSet<Character>();
@@ -327,7 +325,9 @@ public class UserRobot {
             for (int i = 0; i < text.length(); i++) {
                 //String symbol = text.substring(i, i + 1);
                 inputSymbol(arr[i],bytes[i]);
-                sleep(100);
+                Random r = new Random();
+                int pause = r.nextInt(400);
+                sleep(pause + 100);
             }
         } catch(Exception ex){
             ex.printStackTrace();
@@ -353,14 +353,19 @@ public class UserRobot {
     }
 
     protected void inputSymbol(char symbol, int code){
-        if (this.rusMap.containsKey(symbol)){
+        if ((this.rusMap.containsKey(symbol)) && (this.encode == 0)){
             changeInput();
+            this.encode = 1;
+        }
+        if ((!this.rusMap.containsKey(symbol)) && (this.encode != 0)){
+            changeInput();
+            this.encode = 0;
         }
         int num = getCode(symbol,code);
         inputChar(num);
-        if (this.rusMap.containsKey(symbol)){
-            changeInput();
-        }
+        //if (this.rusMap.containsKey(symbol)){
+        //    changeInput();
+        //}
     }
 
 
@@ -458,7 +463,7 @@ public class UserRobot {
                     System.out.println(text);
 
                     if (j==0 && !text.contains("miele-m.ru") && !text.contains("miele-servicebt.ru")){
-                        if (i < 4) {
+                        if (i < 3) {
                             ret.add(points[i]);
                             System.out.println("Add point " + i);
                         }
@@ -555,6 +560,9 @@ public class UserRobot {
         ArrayList<String> queries = getQueries();
         int j = 0;
         for (String query: queries){
+            openAndTransfer(new Point(902,63));
+            sleep(500);
+
             mouseMove(338, 134);
             mouse1Press(338, 134);
             clearText();
@@ -569,12 +577,15 @@ public class UserRobot {
                 sleep(2*this.timeout);
                 //open(p);
                 openAndTransfer(p);
-                sleep(8*this.timeout);
+                    Random r = new Random();
+                    int pause = r.nextInt(40);
+                sleep(80 * this.timeout + pause * this.timeout);
                 closeTab();
                 sleep(4*this.timeout);
             }
             j++;
-            if (j > 2) {
+            if (j > 0) {
+
                 newTab();
                 j = 0;
             }
