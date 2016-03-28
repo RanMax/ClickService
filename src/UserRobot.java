@@ -574,7 +574,7 @@ public class UserRobot {
                 sleep(4*this.timeout);
             }
             j++;
-            if (j > 3) {
+            if (j > 2) {
                 newTab();
                 j = 0;
             }
