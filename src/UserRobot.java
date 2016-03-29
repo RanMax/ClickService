@@ -9,8 +9,6 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.URL;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -21,6 +19,7 @@ public class UserRobot {
     HashSet<Character> engSum = new HashSet<Character>();
     HashMap<Character,Character> rusMap;
     HashMap<Character,Integer> engMap;
+    HashMap<Point,String> pointToSite;
     public int timeout = 500;
     public int encode = 0;
 
@@ -157,6 +156,86 @@ public class UserRobot {
         }
     }
 
+    public void clearHistory(){
+        try {
+            Robot r = new Robot();
+            //openAndTransfer(new Point(561,701));
+            newTab();
+            sleep(1000);
+            openAndTransfer(new Point(180,59));
+            sleep(500);
+            setClipboard("chrome://settings/clearBrowserData");
+            sleep(500);
+            r.keyPress(KeyEvent.VK_CONTROL);
+            r.keyPress(KeyEvent.VK_V);
+            sleep(500);
+            r.keyRelease(KeyEvent.VK_CONTROL);
+            r.keyRelease(KeyEvent.VK_V);
+            sleep(1000);
+
+            r.keyPress(KeyEvent.VK_ENTER);
+            r.keyRelease(KeyEvent.VK_ENTER);
+            //r.setAutoDelay(500);
+            /*
+            r.keyPress(KeyEvent.VK_CONTROL);
+            sleep(10);
+            r.keyPress(KeyEvent.VK_SHIFT);
+            sleep(10);
+            r.keyPress(KeyEvent.VK_DELETE);
+            sleep(500);
+
+            r.keyRelease(KeyEvent.VK_CONTROL);
+            r.keyRelease(KeyEvent.VK_SHIFT);
+            r.keyRelease(KeyEvent.VK_DELETE);
+            */
+
+            sleep(2000);
+            //openAndTransfer(new Point(561,688));
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyPress(KeyEvent.VK_TAB);
+            sleep(50);
+            r.keyRelease(KeyEvent.VK_TAB);
+            sleep(50);
+
+            sleep(500);
+            closeTab();
+
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
     public void clearText(){
         try {
             Robot r = new Robot();
@@ -214,6 +293,7 @@ public class UserRobot {
 
     public ArrayList<String> getQueries(){
         ArrayList<String> ret = new ArrayList<String>();
+        /*
         ret.add("MIELE ДИАГНОСТИКА");
         ret.add("MIELE ОФИЦИАЛЬНЫЙ САЙТ РЕМОНТ");
         ret.add("MIELE ОШИБКА ПОДАЧИ ВОДЫ");
@@ -313,6 +393,36 @@ public class UserRobot {
         ret.add("УСТАНОВКА МИЕЛЕ");
         ret.add("УСТАНОВКА МИЛЕ");
         ret.add("УСТАНОВКА МИЛИ");
+        */
+/*
+        ret.add("RESTART ВЫЗВАТЬ");
+        ret.add("RESTART РЕМОНТ");
+        ret.add("RESTART РЕМОНТ МОСКВА");
+        ret.add("RESTART СЕРВИС");
+        ret.add("RESTART СЕРВИСНЫЙ ЦЕНТР");
+        ret.add("RESTART СРОЧНЫЙ РЕМОНТ");
+        ret.add("RESTART ФИРМЕННЫЙ РЕМОНТ");
+        ret.add("RESTART ФИРМЕННЫЙ СЕРВИСНЫЙ ЦЕНТР");
+        ret.add("РЕСТАРТ МОСКВА");
+        ret.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ САЙТ");
+        ret.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ СЕРВИС");
+        ret.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ СЕРВИСНЫЙ ЦЕНТР");
+        ret.add("РЕСТАРТ РЕМОНТ");
+        ret.add("РЕСТАРТ САЙТ");
+        ret.add("РЕСТАРТ СЕРВИС");
+        ret.add("РЕСТАРТ СРОЧНЫЙ РЕМОНТ");
+        ret.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ РЕСТАРТ");
+        ret.add("РЕМОНТ ВЫТЯЖЕК RESTART");
+        ret.add("РЕМОНТ ВЫТЯЖЕК РЕСТАРТ");
+        ret.add("РЕМОНТ ПЛИТ RESTART");
+        ret.add("РЕМОНТ ПЛИТ РЕСТАРТ");
+        ret.add("РЕМОНТ ХОЛОДИЛЬНИКОВ RESTART");
+        ret.add("РЕМОНТ ХОЛОДИЛЬНИКОВ РЕСТАРТ");
+        */
+        ret.add("RESTART РЕМОНТ");
+        ret.add("RESTART СЕРВИС");
+        ret.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ RESTART");
+        Collections.shuffle(ret);
 
         return ret;
     }
@@ -391,6 +501,9 @@ public class UserRobot {
     }
 
     public void mouseMove(int x, int y){
+        Point location = MouseInfo.getPointerInfo().getLocation();
+        int startX = (int)location.getX();
+        int startY = (int)location.getY();
         try {
             Robot r = new Robot();
             r.mouseMove(x, y);
@@ -443,6 +556,7 @@ public class UserRobot {
     }
 
     public ArrayList<Point> getPoints(String query){
+        this.pointToSite = new HashMap<Point, String>();
         Point[] points = new Point[4];
         points[0]=new Point(230,206);
         points[1]=new Point(230,332);
@@ -452,7 +566,7 @@ public class UserRobot {
         try {
             String queryText = "https://yandex.ru/search/?text="+query + "&rstr=-1";
             //downloadFiles("https://yandex.ru/search/?text=miele%20aaa%20%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82%20%D1%81%D1%82%D0%B8%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D1%85%20%D0%BC%D0%B0%D1%88%D0%B8%D0%BD%20miele&lr=213&rstr=-1&rnd=82767","e:/direct.html",100);
-            File input = new File("E:\\04_JavaProjects\\ClickService\\temp\\page.html");
+            File input = new File("C:\\Users\\Максим\\Downloads\\page.html");
             Document doc = Jsoup.parse(input, "utf8", "http://example.com/");
             System.out.println(doc.text());
             int j = 0;
@@ -465,10 +579,13 @@ public class UserRobot {
                     if (j==0 && !text.contains("miele-m.ru") && !text.contains("miele-servicebt.ru")){
                         if (i < 3) {
                             ret.add(points[i]);
+                            if (text.contains("mirrestart.ru")) this.pointToSite.put(points[i],"mirrestart.ru");
+                            if (text.contains("service-restart.ru")) this.pointToSite.put(points[i],"service-restart.ru");
                             System.out.println("Add point " + i);
                         }
 
                     }
+
                     i++;
                 }
                 j++;
@@ -514,6 +631,7 @@ public class UserRobot {
         }
     }
 
+
     public void savePage(){
         setClipboard("page.html");
         try {
@@ -549,6 +667,7 @@ public class UserRobot {
         }
     }
 
+
     public void setClipboard(String str) {
         StringSelection ss = new StringSelection(str);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
@@ -560,7 +679,19 @@ public class UserRobot {
         ArrayList<String> queries = getQueries();
         int j = 0;
         for (String query: queries){
-            openAndTransfer(new Point(902,63));
+            clearHistory();
+            openAndTransfer(new Point(902,63)); //Переключение proxy
+            sleep(1000);
+
+            openAndTransfer(new Point(667,139));
+            sleep(500);
+            openAndTransfer(new Point(301,210));
+            sleep(500);
+            input("Москва и ");
+            sleep(500);
+            inputChar(KeyEvent.VK_ENTER); //13.Enter
+            sleep(500);
+            openAndTransfer(new Point(667,139));
             sleep(500);
 
             mouseMove(338, 134);
@@ -569,17 +700,28 @@ public class UserRobot {
             input(query);
             inputChar(KeyEvent.VK_ENTER); //13.Enter
             //ur.input("ABCDEFGHIJKLMNOPQRSTYVWXYZ");
-            sleep(10*this.timeout);
+            sleep(20*this.timeout);
             savePage();
             ArrayList<Point> points = getPoints(query);
 
-                for (Point p: points){
+
+            for (Point p: points){
                 sleep(2*this.timeout);
                 //open(p);
                 openAndTransfer(p);
-                    Random r = new Random();
-                    int pause = r.nextInt(40);
-                sleep(80 * this.timeout + pause * this.timeout);
+
+                Random r = new Random();
+                int pause = r.nextInt(40);
+                sleep(20 * this.timeout + pause * this.timeout);
+
+                String site = this.pointToSite.get(p);
+                if (site != null) {
+                    if (site.equals("service-restart.ru")) sceneServiceRestartRu();
+                    if (site.equals("mirrestart.ru")) sceneMirRestartRu();
+                }
+
+                sleep(20 * this.timeout);
+
                 closeTab();
                 sleep(4*this.timeout);
             }
@@ -591,5 +733,57 @@ public class UserRobot {
             }
 
         }
+    }
+
+    public void sceneServiceRestartRu(){
+        openAndTransfer(new Point(400,261));
+        sleep(4000);
+        openAndTransfer(new Point(391,389));
+        sleep(4000);
+        try {
+            Robot r = new Robot();
+            r.mouseWheel(100);
+            sleep(2000);
+            r.mouseWheel(100);
+            sleep(2000);
+            r.mouseWheel(100);
+            sleep(2000);
+            r.mouseWheel(100);
+            sleep(2000);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+
+    public void sceneMirRestartRu(){
+        openAndTransfer(new Point(56,459));
+        sleep(2000);
+        openAndTransfer(new Point(94,537));
+        sleep(2000);
+        openAndTransfer(new Point(113,610));
+        sleep(2000);
+        openAndTransfer(new Point(775,459));
+        sleep(2000);
+        openAndTransfer(new Point(580,465));
+        sleep(2000);
+        input("ремонт варочной панели");
+        sleep(2000);
+        inputChar(KeyEvent.VK_ENTER);
+        sleep(4000);
+        try {
+            Robot r = new Robot();
+            r.mouseWheel(100);
+            sleep(2000);
+            r.mouseWheel(100);
+            sleep(2000);
+            r.mouseWheel(100);
+            sleep(2000);
+            r.mouseWheel(100);
+            sleep(2000);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+
     }
 }
