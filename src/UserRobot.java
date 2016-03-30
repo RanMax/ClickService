@@ -20,6 +20,7 @@ public class UserRobot {
     HashMap<Character,Character> rusMap;
     HashMap<Character,Integer> engMap;
     HashMap<Point,String> pointToSite;
+    ArrayList<String> queries;
     public int timeout = 500;
     public int encode = 0;
 
@@ -292,108 +293,108 @@ public class UserRobot {
     }
 
     public ArrayList<String> getQueries(){
-        ArrayList<String> ret = new ArrayList<String>();
-        /*
-        ret.add("MIELE ДИАГНОСТИКА");
-        ret.add("MIELE ОФИЦИАЛЬНЫЙ САЙТ РЕМОНТ");
-        ret.add("MIELE ОШИБКА ПОДАЧИ ВОДЫ");
-        ret.add("MIELE РЕМОНТ");
-        ret.add("MIELE РЕМОНТ БЫТОВОЙ ТЕХНИКИ");
-        ret.add("MIELE РЕМОНТ МОСКВА");
-        ret.add("MIELE СЕРВИС");
-        ret.add("MIELE СЕРВИС ЦЕНТР");
-        ret.add("MIELE СЕРВИСНЫЙ ЦЕНТР");
-        ret.add("MIELE СЕРВИСНЫЙ ЦЕНТР МОСКВА");
-        ret.add("MIELE СЛОМАЛАСЬ");
-        ret.add("MIELE СРОЧНЫЙ РЕМОНТ");
-        ret.add("MIELE СТИРАЛЬНАЯ МАШИНА ЗАПЧАСТИ");
-        ret.add("MILELE РЕМОНТ");
-        ret.add("SERVICE MIELE");
-        ret.add("SERVICE MIELE");
-        ret.add("W 3240 MIELE ЗАПЧАСТИ МАНЖЕТ");
-        ret.add("WATERPROOF MIELE");
-        ret.add("СЕРВИСНАЯ СЛУЖБА МИЕЛЕ");
-        ret.add("СЕРВИСНАЯ СЛУЖБА МИЕЛЕ");
-        ret.add("ЗАПЧАСТИ MIELE");
-        ret.add("ЗАПЧАСТИ MIELE");
-        ret.add("ЗАПЧАСТИ MIELE В МОСКВЕ");
-        ret.add("ЗАПЧАСТИ MIELE В НАЛИЧИИ");
-        ret.add("ЗАПЧАСТИ ДЛЯ MIELE CVA 620");
-        ret.add("ЗАПЧАСТИ ДЛЯ MIELE CVA 620 РЕМОНТ");
-        ret.add("ЗАПЧАСТИ ДЛЯ МАШИН MIELE");
-        ret.add("ЗАПЧАСТИ ДЛЯ СТИРАЛЬНОЙ МАШИНЫ МИЛЕ PW 5065");
-        ret.add("ЗАПЧАСТИ ДЛЯ СТИРАЛЬНЫХ МАШИН MIELE");
-        ret.add("ЗАПЧАСТИ ДЛЯ СТИРАЛЬНЫХ МАШИН МИЛЕ");
-        ret.add("ЗАПЧАСТИ К ПОСУДОМОЕЧНОЙ МАШИНЕ MIELE");
-        ret.add("ЗАПЧАСТИ МИЕЛЕ");
-        ret.add("ЗАПЧАСТИ МИЛЕ");
-        ret.add("ЗАПЧАСТИ МИЛЕ СТИРАЛЬНЫЕ МАШИНЫ");
-        ret.add("ЗАПЧАСТИ МИЛИ");
-        ret.add("МИЕЛЕ ОФИЦИАЛЬНЫЙ САЙТ СЕРВИС");
-        ret.add("МИЕЛЕ РЕМОНТ");
-        ret.add("МИЕЛЕ СЕРВИС");
-        ret.add("МИЕЛЕ СЕРВИСНЫЙ ЦЕНТР МИЛЕ");
-        ret.add("МИЕЛЕ СЛОМАЛАСЬ");
-        ret.add("МИЕЛЕ СРОЧНЫЙ РЕМОНТ");
-        ret.add("МИЛ СЕРВИС");
-        ret.add("МИЛЕ РЕМОНТ");
-        ret.add("МИЛЕ СЕРВИС");
-        ret.add("МИЛЕ СЕРВИС ЦЕНТР");
-        ret.add("МИЛЕ СЕРВИС ЦЕНТР МОСКВА");
-        ret.add("МИЛЕ СЕРВИСНЫЙ ЦЕНТР");
-        ret.add("МИЛЕ СРОЧНЫЙ РЕМОНТ");
-        ret.add("МИЛИ ДИАГНОСТИКА");
-        ret.add("МИЛИ РЕМОНТ");
-        ret.add("МИЛИ СЕРВИС");
-        ret.add("МИЛИ СЛОМАЛАСЬ");
-        ret.add("МИЛЛ СЕРВИС");
-        ret.add("МИЛЛ СЕРВИС");
-        ret.add("МИЛЛИ ДИАГНОСТИКА");
-        ret.add("МИЛЛИ СЕРВИСНЫЙ ЦЕНТР");
-        ret.add("ОШИБКА WATERPROOF MIELE");
-        ret.add("ОШИБКА СЛИВА ВОДЫ MIELE");
-        ret.add("ПОДКЛЮЧЕНИЕ СТИРАЛЬНОЙ МАШИНЫ MIELE");
-        ret.add("РЕМОНТ MIELE В МОСКВЕ");
-        ret.add("РЕМОНТ БЫТОВОЙ ТЕХНИКИ МИЛЕ");
-        ret.add("РЕМОНТ ВАРОЧНЫХ ПАНЕЛЕЙ MIELE");
-        ret.add("РЕМОНТ ВЫТЯЖЕК MIELE");
-        ret.add("РЕМОНТ ВЫТЯЖКИ MIELE");
-        ret.add("РЕМОНТ ДУХОВЫХ ШКАФОВ MIELE");
-        ret.add("РЕМОНТ КОФЕМАШИН MIELE");
-        ret.add("РЕМОНТ МАШИН MIELE");
-        ret.add("РЕМОНТ МИЛЛЕ");
-        ret.add("РЕМОНТ МИЛЛИ");
-        ret.add("РЕМОНТ ПОСУДОМОЕЧНЫХ МАШИН MIELE");
-        ret.add("РЕМОНТ ПОСУДОМОЕЧНЫХ МАШИН МИЛЕ");
-        ret.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЛЕ");
-        ret.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЛИ");
-        ret.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН MIELE");
-        ret.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЕЛЕ");
-        ret.add("РЕМОНТ СУШИЛЬНЫХ МАШИН MIELE");
-        ret.add("РЕМОНТ ТЕХНИКИ MIELE");
-        ret.add("РЕМОНТ ТЕХНИКИ МИЛЕ");
-        ret.add("СЕРВИС MIELE В МОСКВЕ");
-        ret.add("СЕРВИС МИЕЛЕ");
-        ret.add("СЕРВИС МИЕЛЕ В МОСКВЕ");
-        ret.add("СЕРВИС МИЛЕ");
-        ret.add("СЕРВИС МИЛЕ В МОСКВЕ");
-        ret.add("СЕРВИС МИЛЕ В МОСКВЕ");
-        ret.add("СЕРВИС МИЛИ");
-        ret.add("СЕРВИС МИЛЛЕ");
-        ret.add("СЕРВИС ЦЕНТР MIELE");
-        ret.add("СЕРВИС ЦЕНТР MIELE В МОСКВЕ");
-        ret.add("СЕРВИС ЦЕНТР МИЛЕ");
-        ret.add("СЕРВИС ЦЕНТР МИЛЕ В МОСКВЕ");
-        ret.add("СЕРВИСНАЯ СЛУЖБА MIELE");
-        ret.add("СЕРВИСНАЯ СЛУЖБА МИЛЛИ");
-        ret.add("СЕРВИСНЫЙ ЦЕНТР MIELE МОСКВА");
-        ret.add("СТИРАЛЬНАЯ МАШИНА MIELE ОШИБКА WATERPROOF");
-        ret.add("СТИРАЛЬНАЯ МАШИНА MIELE ОШИБКА СЛИВ ВОДЫ");
-        ret.add("УСТАНОВКА MIELE");
-        ret.add("УСТАНОВКА МИЕЛЕ");
-        ret.add("УСТАНОВКА МИЛЕ");
-        ret.add("УСТАНОВКА МИЛИ");
-        */
+        this.queries = new ArrayList<String>();
+
+        queries.add("MIELE ДИАГНОСТИКА");
+        queries.add("MIELE ОФИЦИАЛЬНЫЙ САЙТ РЕМОНТ");
+        queries.add("MIELE ОШИБКА ПОДАЧИ ВОДЫ");
+        queries.add("MIELE РЕМОНТ");
+        queries.add("MIELE РЕМОНТ БЫТОВОЙ ТЕХНИКИ");
+        queries.add("MIELE РЕМОНТ МОСКВА");
+        queries.add("MIELE СЕРВИС");
+        queries.add("MIELE СЕРВИС ЦЕНТР");
+        queries.add("MIELE СЕРВИСНЫЙ ЦЕНТР");
+        queries.add("MIELE СЕРВИСНЫЙ ЦЕНТР МОСКВА");
+        queries.add("MIELE СЛОМАЛАСЬ");
+        queries.add("MIELE СРОЧНЫЙ РЕМОНТ");
+        queries.add("MIELE СТИРАЛЬНАЯ МАШИНА ЗАПЧАСТИ");
+        queries.add("MILELE РЕМОНТ");
+        queries.add("SERVICE MIELE");
+        queries.add("SERVICE MIELE");
+        queries.add("W 3240 MIELE ЗАПЧАСТИ МАНЖЕТ");
+        queries.add("WATERPROOF MIELE");
+        queries.add("СЕРВИСНАЯ СЛУЖБА МИЕЛЕ");
+        queries.add("СЕРВИСНАЯ СЛУЖБА МИЕЛЕ");
+        queries.add("ЗАПЧАСТИ MIELE");
+        queries.add("ЗАПЧАСТИ MIELE");
+        queries.add("ЗАПЧАСТИ MIELE В МОСКВЕ");
+        queries.add("ЗАПЧАСТИ MIELE В НАЛИЧИИ");
+        queries.add("ЗАПЧАСТИ ДЛЯ MIELE CVA 620");
+        queries.add("ЗАПЧАСТИ ДЛЯ MIELE CVA 620 РЕМОНТ");
+        queries.add("ЗАПЧАСТИ ДЛЯ МАШИН MIELE");
+        queries.add("ЗАПЧАСТИ ДЛЯ СТИРАЛЬНОЙ МАШИНЫ МИЛЕ PW 5065");
+        queries.add("ЗАПЧАСТИ ДЛЯ СТИРАЛЬНЫХ МАШИН MIELE");
+        queries.add("ЗАПЧАСТИ ДЛЯ СТИРАЛЬНЫХ МАШИН МИЛЕ");
+        queries.add("ЗАПЧАСТИ К ПОСУДОМОЕЧНОЙ МАШИНЕ MIELE");
+        queries.add("ЗАПЧАСТИ МИЕЛЕ");
+        queries.add("ЗАПЧАСТИ МИЛЕ");
+        queries.add("ЗАПЧАСТИ МИЛЕ СТИРАЛЬНЫЕ МАШИНЫ");
+        queries.add("ЗАПЧАСТИ МИЛИ");
+        queries.add("МИЕЛЕ ОФИЦИАЛЬНЫЙ САЙТ СЕРВИС");
+        queries.add("МИЕЛЕ РЕМОНТ");
+        queries.add("МИЕЛЕ СЕРВИС");
+        queries.add("МИЕЛЕ СЕРВИСНЫЙ ЦЕНТР МИЛЕ");
+        queries.add("МИЕЛЕ СЛОМАЛАСЬ");
+        queries.add("МИЕЛЕ СРОЧНЫЙ РЕМОНТ");
+        queries.add("МИЛ СЕРВИС");
+        queries.add("МИЛЕ РЕМОНТ");
+        queries.add("МИЛЕ СЕРВИС");
+        queries.add("МИЛЕ СЕРВИС ЦЕНТР");
+        queries.add("МИЛЕ СЕРВИС ЦЕНТР МОСКВА");
+        queries.add("МИЛЕ СЕРВИСНЫЙ ЦЕНТР");
+        queries.add("МИЛЕ СРОЧНЫЙ РЕМОНТ");
+        queries.add("МИЛИ ДИАГНОСТИКА");
+        queries.add("МИЛИ РЕМОНТ");
+        queries.add("МИЛИ СЕРВИС");
+        queries.add("МИЛИ СЛОМАЛАСЬ");
+        queries.add("МИЛЛ СЕРВИС");
+        queries.add("МИЛЛ СЕРВИС");
+        queries.add("МИЛЛИ ДИАГНОСТИКА");
+        queries.add("МИЛЛИ СЕРВИСНЫЙ ЦЕНТР");
+        queries.add("ОШИБКА WATERPROOF MIELE");
+        queries.add("ОШИБКА СЛИВА ВОДЫ MIELE");
+        queries.add("ПОДКЛЮЧЕНИЕ СТИРАЛЬНОЙ МАШИНЫ MIELE");
+        queries.add("РЕМОНТ MIELE В МОСКВЕ");
+        queries.add("РЕМОНТ БЫТОВОЙ ТЕХНИКИ МИЛЕ");
+        queries.add("РЕМОНТ ВАРОЧНЫХ ПАНЕЛЕЙ MIELE");
+        queries.add("РЕМОНТ ВЫТЯЖЕК MIELE");
+        queries.add("РЕМОНТ ВЫТЯЖКИ MIELE");
+        queries.add("РЕМОНТ ДУХОВЫХ ШКАФОВ MIELE");
+        queries.add("РЕМОНТ КОФЕМАШИН MIELE");
+        queries.add("РЕМОНТ МАШИН MIELE");
+        queries.add("РЕМОНТ МИЛЛЕ");
+        queries.add("РЕМОНТ МИЛЛИ");
+        queries.add("РЕМОНТ ПОСУДОМОЕЧНЫХ МАШИН MIELE");
+        queries.add("РЕМОНТ ПОСУДОМОЕЧНЫХ МАШИН МИЛЕ");
+        queries.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЛЕ");
+        queries.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЛИ");
+        queries.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН MIELE");
+        queries.add("РЕМОНТ СТИРАЛЬНЫХ МАШИН МИЕЛЕ");
+        queries.add("РЕМОНТ СУШИЛЬНЫХ МАШИН MIELE");
+        queries.add("РЕМОНТ ТЕХНИКИ MIELE");
+        queries.add("РЕМОНТ ТЕХНИКИ МИЛЕ");
+        queries.add("СЕРВИС MIELE В МОСКВЕ");
+        queries.add("СЕРВИС МИЕЛЕ");
+        queries.add("СЕРВИС МИЕЛЕ В МОСКВЕ");
+        queries.add("СЕРВИС МИЛЕ");
+        queries.add("СЕРВИС МИЛЕ В МОСКВЕ");
+        queries.add("СЕРВИС МИЛЕ В МОСКВЕ");
+        queries.add("СЕРВИС МИЛИ");
+        queries.add("СЕРВИС МИЛЛЕ");
+        queries.add("СЕРВИС ЦЕНТР MIELE");
+        queries.add("СЕРВИС ЦЕНТР MIELE В МОСКВЕ");
+        queries.add("СЕРВИС ЦЕНТР МИЛЕ");
+        queries.add("СЕРВИС ЦЕНТР МИЛЕ В МОСКВЕ");
+        queries.add("СЕРВИСНАЯ СЛУЖБА MIELE");
+        queries.add("СЕРВИСНАЯ СЛУЖБА МИЛЛИ");
+        queries.add("СЕРВИСНЫЙ ЦЕНТР MIELE МОСКВА");
+        queries.add("СТИРАЛЬНАЯ МАШИНА MIELE ОШИБКА WATERPROOF");
+        queries.add("СТИРАЛЬНАЯ МАШИНА MIELE ОШИБКА СЛИВ ВОДЫ");
+        queries.add("УСТАНОВКА MIELE");
+        queries.add("УСТАНОВКА МИЕЛЕ");
+        queries.add("УСТАНОВКА МИЛЕ");
+        queries.add("УСТАНОВКА МИЛИ");
+
 /*
         ret.add("RESTART ВЫЗВАТЬ");
         ret.add("RESTART РЕМОНТ");
@@ -419,12 +420,27 @@ public class UserRobot {
         ret.add("РЕМОНТ ХОЛОДИЛЬНИКОВ RESTART");
         ret.add("РЕМОНТ ХОЛОДИЛЬНИКОВ РЕСТАРТ");
         */
+
+        /*
         ret.add("RESTART РЕМОНТ");
         ret.add("RESTART СЕРВИС");
         ret.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ RESTART");
-        Collections.shuffle(ret);
+        */
+        Collections.shuffle(queries);
 
+        return queries;
+    }
+
+    public int getRandom(int bound){
+        Random r = new Random();
+        int ret = r.nextInt(bound);
         return ret;
+    }
+
+    public String getRandomString(){
+        int size = this.queries.size();
+        int index = getRandom(size);
+        return queries.get(index);
     }
 
     public void input(String text){
@@ -445,6 +461,8 @@ public class UserRobot {
     }
 
     public void sleep(int millis){
+        Random r = new Random();
+        if (millis > 4) millis = millis + r.nextInt(millis/4);
         try {
             Thread.sleep(millis);
         } catch (Exception ex){
@@ -508,6 +526,17 @@ public class UserRobot {
             Robot r = new Robot();
             r.mouseMove(x, y);
         } catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public void mouseWheel(int length){
+        try {
+            Robot r = new Robot();
+            r.mouseWheel(length);
+            //sleep(2000);
+            //r.mouseWheel(5);
+        } catch(Exception ex){
             ex.printStackTrace();
         }
     }
@@ -581,6 +610,7 @@ public class UserRobot {
                             ret.add(points[i]);
                             if (text.contains("mirrestart.ru")) this.pointToSite.put(points[i],"mirrestart.ru");
                             if (text.contains("service-restart.ru")) this.pointToSite.put(points[i],"service-restart.ru");
+                            if (text.contains("miele.ru")) this.pointToSite.put(points[i],"miele.ru");
                             System.out.println("Add point " + i);
                         }
 
@@ -718,7 +748,27 @@ public class UserRobot {
                 if (site != null) {
                     if (site.equals("service-restart.ru")) sceneServiceRestartRu();
                     if (site.equals("mirrestart.ru")) sceneMirRestartRu();
+                    if (site.equals("miele.ru")) sceneMieleRu();
+
                 }
+
+                mouseWheel(4);
+                sleep(this.timeout);
+                mouseWheel(4);
+                sleep(this.timeout);
+                mouseWheel(4);
+                sleep(this.timeout);
+                mouseWheel(-4);
+                sleep(this.timeout);
+                mouseWheel(-4);
+                sleep(this.timeout);
+                mouseWheel(-4);
+                sleep(this.timeout);
+                openAndTransfer(new Point(268,333));
+                sleep(4*this.timeout);
+                openAndTransfer(new Point(863,248));
+                sleep(4*this.timeout);
+                openAndTransfer(new Point(231,860));
 
                 sleep(20 * this.timeout);
 
@@ -732,6 +782,43 @@ public class UserRobot {
                 j = 0;
             }
 
+        }
+    }
+
+    public void sceneMieleRu(){
+        int rand = getRandom(2);
+        System.out.println("Random="+rand);
+        //rand = 1;
+        if (rand == 0) {
+            openAndTransfer(new Point(40, 340));
+            sleep(4000);
+            openAndTransfer(new Point(129, 341));
+            sleep(4000);
+            openAndTransfer(new Point(231, 345));
+            sleep(4000);
+            openAndTransfer(new Point(371, 342));
+            sleep(4000);
+            openAndTransfer(new Point(554, 347));
+            sleep(4000);
+            try {
+                Robot r = new Robot();
+                r.mouseWheel(5);
+                sleep(2000);
+                r.mouseWheel(5);
+                sleep(2000);
+                r.mouseWheel(-5);
+                sleep(2000);
+                r.mouseWheel(-5);
+                sleep(2000);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        if (rand == 1){
+            openAndTransfer(new Point(724, 344));
+            sleep(4000);
+            String input = getRandomString();
+            input(input);
         }
     }
 
