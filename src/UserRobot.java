@@ -294,7 +294,7 @@ public class UserRobot {
 
     public ArrayList<String> getQueries(){
         this.queries = new ArrayList<String>();
-
+/*
         queries.add("MIELE ДИАГНОСТИКА");
         queries.add("MIELE ОФИЦИАЛЬНЫЙ САЙТ РЕМОНТ");
         queries.add("MIELE ОШИБКА ПОДАЧИ ВОДЫ");
@@ -394,7 +394,7 @@ public class UserRobot {
         queries.add("УСТАНОВКА МИЕЛЕ");
         queries.add("УСТАНОВКА МИЛЕ");
         queries.add("УСТАНОВКА МИЛИ");
-
+*/
 /*
         ret.add("RESTART ВЫЗВАТЬ");
         ret.add("RESTART РЕМОНТ");
@@ -421,11 +421,11 @@ public class UserRobot {
         ret.add("РЕМОНТ ХОЛОДИЛЬНИКОВ РЕСТАРТ");
         */
 
-        /*
-        ret.add("RESTART РЕМОНТ");
-        ret.add("RESTART СЕРВИС");
-        ret.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ RESTART");
-        */
+
+        queries.add("RESTART РЕМОНТ");
+        queries.add("RESTART СЕРВИС");
+        queries.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ RESTART");
+
         Collections.shuffle(queries);
 
         return queries;
@@ -532,8 +532,9 @@ public class UserRobot {
 
     public void mouseWheel(int length){
         try {
+            int rand = getRandom(Math.abs(length)/4)-Math.abs(length/8);
             Robot r = new Robot();
-            r.mouseWheel(length);
+            r.mouseWheel(length+rand);
             //sleep(2000);
             //r.mouseWheel(5);
         } catch(Exception ex){
@@ -579,9 +580,11 @@ public class UserRobot {
     }
 
     public void openAndTransfer(Point point){
+        int dx = getRandom(9)-4;
+        int dy = getRandom(9)-4;
         mouseMove(point.x, point.y);
         sleep(this.timeout);
-        mousePress(point.x, point.y, InputEvent.BUTTON1_MASK);
+        mousePress(point.x+dx, point.y+dy, InputEvent.BUTTON1_MASK);
     }
 
     public ArrayList<Point> getPoints(String query){
@@ -823,23 +826,33 @@ public class UserRobot {
     }
 
     public void sceneServiceRestartRu(){
+        int cnt = getRandom(6);
         openAndTransfer(new Point(400,261));
         sleep(4000);
-        openAndTransfer(new Point(391,389));
+        openAndTransfer(new Point(391,302+28*cnt));
         sleep(4000);
-        try {
-            Robot r = new Robot();
-            r.mouseWheel(100);
-            sleep(2000);
-            r.mouseWheel(100);
-            sleep(2000);
-            r.mouseWheel(100);
-            sleep(2000);
-            r.mouseWheel(100);
-            sleep(2000);
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
+        mouseWheel(100);
+        sleep(2000);
+        mouseWheel(100);
+        sleep(2000);
+        mouseWheel(100);
+        sleep(2000);
+        mouseWheel(100);
+        sleep(2000);
+        mouseWheel(-100);
+        sleep(2000);
+        mouseWheel(-100);
+        sleep(2000);
+        mouseWheel(-100);
+        sleep(2000);
+        mouseWheel(-100);
+        sleep(2000);
+        openAndTransfer(new Point(477,260));
+        mouseWheel(100);
+        sleep(2000);
+        mouseWheel(-100);
+        sleep(2000);
+        sleep(4000);
 
     }
 
