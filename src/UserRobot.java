@@ -23,6 +23,9 @@ public class UserRobot {
     ArrayList<String> queries;
     public int timeout = 500;
     public int encode = 0;
+    public int speed = 0;
+    //public static int counter = 0;
+    public int steps = 0;
 
     public UserRobot(){
         this.engSum = new HashSet<Character>();
@@ -111,8 +114,8 @@ public class UserRobot {
         rusMap.put('И','B');
         rusMap.put('Т','N');
         rusMap.put('Ь','M');
-        rusMap.put('Б',',');
-        rusMap.put('Ю','.');
+        rusMap.put('Б','<');
+        rusMap.put('Ю','>');
         rusMap.put('Ё','`');
 
         this.engMap = new HashMap<Character, Integer>();
@@ -144,14 +147,26 @@ public class UserRobot {
         engMap.put('Z',90);
     }
 
+    public void cCleaner(){
+        sleep(10*timeout);
+        openAndTransfer(new Point(184,753));
+        sleep(20*this.timeout);
+        openAndTransfer(new Point(1129,642));
+        sleep(5*this.timeout);
+        inputChar(KeyEvent.VK_ENTER);
+        sleep(20*this.timeout);
+    }
+
     public void changeInput(){
+        System.out.println("Encode="+this.encode);
         try {
             Robot r = new Robot();
-            r.keyPress(18);
-            r.keyPress(16);
-            Thread.sleep(5);
-            r.keyRelease(16);
-            r.keyRelease(18);
+
+            r.keyPress(KeyEvent.VK_ALT);
+            r.keyPress(KeyEvent.VK_SHIFT);
+            sleep(5);
+            r.keyRelease(KeyEvent.VK_ALT);
+            r.keyRelease(KeyEvent.VK_SHIFT);
         } catch(Exception ex){
             ex.printStackTrace();
         }
@@ -163,7 +178,7 @@ public class UserRobot {
             //openAndTransfer(new Point(561,701));
             newTab();
             sleep(1000);
-            openAndTransfer(new Point(180,59));
+            openAndTransfer(new Point(276,45));
             sleep(500);
             setClipboard("chrome://settings/clearBrowserData");
             sleep(500);
@@ -256,6 +271,8 @@ public class UserRobot {
     }
 
     public void closeTab(){
+        randomClick(new Point(27,7),new Point(170,16));
+        /* Закрытие вкладки - старая версия
         try {
             Robot r = new Robot();
             r.keyPress(KeyEvent.VK_CONTROL);
@@ -266,6 +283,7 @@ public class UserRobot {
         } catch(Exception ex){
             ex.printStackTrace();
         }
+        */
     }
 
     public int getCode(char symbol, int code){
@@ -395,33 +413,42 @@ public class UserRobot {
         queries.add("УСТАНОВКА МИЛЕ");
         queries.add("УСТАНОВКА МИЛИ");
 */
-/*
-        ret.add("RESTART ВЫЗВАТЬ");
-        ret.add("RESTART РЕМОНТ");
-        ret.add("RESTART РЕМОНТ МОСКВА");
-        ret.add("RESTART СЕРВИС");
-        ret.add("RESTART СЕРВИСНЫЙ ЦЕНТР");
-        ret.add("RESTART СРОЧНЫЙ РЕМОНТ");
-        ret.add("RESTART ФИРМЕННЫЙ РЕМОНТ");
-        ret.add("RESTART ФИРМЕННЫЙ СЕРВИСНЫЙ ЦЕНТР");
-        ret.add("РЕСТАРТ МОСКВА");
-        ret.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ САЙТ");
-        ret.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ СЕРВИС");
-        ret.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ СЕРВИСНЫЙ ЦЕНТР");
-        ret.add("РЕСТАРТ РЕМОНТ");
-        ret.add("РЕСТАРТ САЙТ");
-        ret.add("РЕСТАРТ СЕРВИС");
-        ret.add("РЕСТАРТ СРОЧНЫЙ РЕМОНТ");
-        ret.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ РЕСТАРТ");
-        ret.add("РЕМОНТ ВЫТЯЖЕК RESTART");
-        ret.add("РЕМОНТ ВЫТЯЖЕК РЕСТАРТ");
-        ret.add("РЕМОНТ ПЛИТ RESTART");
-        ret.add("РЕМОНТ ПЛИТ РЕСТАРТ");
-        ret.add("РЕМОНТ ХОЛОДИЛЬНИКОВ RESTART");
-        ret.add("РЕМОНТ ХОЛОДИЛЬНИКОВ РЕСТАРТ");
-        */
+
+        queries.add("RESTART ВЫЗВАТЬ");
+        queries.add("RESTART РЕМОНТ");
+        queries.add("RESTART РЕМОНТ МОСКВА");
+        queries.add("RESTART СЕРВИС");
+        queries.add("RESTART СЕРВИСНЫЙ ЦЕНТР");
+        queries.add("RESTART СРОЧНЫЙ РЕМОНТ");
+        queries.add("RESTART ФИРМЕННЫЙ РЕМОНТ");
+        queries.add("RESTART ФИРМЕННЫЙ СЕРВИСНЫЙ ЦЕНТР");
+        queries.add("РЕСТАРТ МОСКВА");
+        queries.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ САЙТ");
+        queries.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ СЕРВИС");
+        queries.add("РЕСТАРТ ОФИЦИАЛЬНЫЙ СЕРВИСНЫЙ ЦЕНТР");
+        queries.add("РЕСТАРТ РЕМОНТ");
+        queries.add("РЕСТАРТ САЙТ");
+        queries.add("РЕСТАРТ СЕРВИС");
+        queries.add("РЕСТАРТ СРОЧНЫЙ РЕМОНТ");
+        queries.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ РЕСТАРТ");
+        queries.add("РЕМОНТ ВЫТЯЖЕК RESTART");
+        queries.add("РЕМОНТ ВЫТЯЖЕК РЕСТАРТ");
+        queries.add("РЕМОНТ ПЛИТ RESTART");
+        queries.add("РЕМОНТ ПЛИТ РЕСТАРТ");
+        queries.add("РЕМОНТ ХОЛОДИЛЬНИКОВ RESTART");
+        queries.add("РЕМОНТ ХОЛОДИЛЬНИКОВ РЕСТАРТ");
 
 
+
+        queries.add("RESTART РЕМОНТ");
+        queries.add("RESTART СЕРВИС");
+        queries.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ RESTART");
+        queries.add("RESTART РЕМОНТ");
+        queries.add("RESTART СЕРВИС");
+        queries.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ RESTART");
+        queries.add("RESTART РЕМОНТ");
+        queries.add("RESTART СЕРВИС");
+        queries.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ RESTART");
         queries.add("RESTART РЕМОНТ");
         queries.add("RESTART СЕРВИС");
         queries.add("РЕМОНТ ВАРОЧНОЙ ПАНЕЛИ RESTART");
@@ -508,6 +535,16 @@ public class UserRobot {
         }
     }
 
+    public void mouse2Press(int x, int y){
+        try {
+            Robot r = new Robot();
+            r.mousePress(InputEvent.BUTTON3_MASK);
+            r.mouseRelease(InputEvent.BUTTON3_MASK);
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
     public void mousePress(int x, int y,int key){
         try {
             Robot r = new Robot();
@@ -518,27 +555,54 @@ public class UserRobot {
         }
     }
 
-    public void mouseMove(int x, int y){
+    public int mouseMove(int x, int y){
         Point location = MouseInfo.getPointerInfo().getLocation();
-        int startX = (int)location.getX();
-        int startY = (int)location.getY();
-        try {
-            Robot r = new Robot();
-            r.mouseMove(x, y);
-        } catch (Exception ex){
-            ex.printStackTrace();
+        RobotPoint startPoint = new RobotPoint(location);
+        RobotPoint endPoint = new RobotPoint(new Point(x,y));
+        startPoint.next = endPoint;
+        startPoint = generateTrace(startPoint);
+        int sumary = go(startPoint);
+        return  sumary;
+    }
+
+    public void mouseSerf(Point p1, Point p2, int time){
+        while (time > 0){
+            int pause = 0;
+            int dx = Math.abs(p1.x - p2.x)/2;
+            int dy = Math.abs(p1.y - p2.y);
+            int x1 = getRandom(dx)+p1.x;
+            int y1 = getRandom(dy)+p1.y;
+            int x2 = getRandom(dx)+p1.x+dx;
+            int y2 = getRandom(dy)+p1.y;
+            Point pN1 = new Point(x1,y1);
+            Point pN2 = new Point(x2,y2);
+            pause = pause + mouseMove(pN1.x,pN1.y);
+
+            pause = pause + mouseMove(pN2.x,pN2.y);
+
+            int pause2 = getRandom(5000);
+            pause = pause + pause2;
+            time = time-pause;
         }
     }
 
-    public void mouseWheel(int length){
-        try {
-            int rand = getRandom(Math.abs(length)/4)-Math.abs(length/8);
-            Robot r = new Robot();
-            r.mouseWheel(length+rand);
-            //sleep(2000);
-            //r.mouseWheel(5);
-        } catch(Exception ex){
-            ex.printStackTrace();
+    public void mouseWheel(int cnt){
+        int absCnt = Math.abs(cnt);
+        int speed = getRandom(30);
+        while (absCnt > 0){
+            try {
+                int pause = 10+speed*getRandom(10);
+                int stop = getRandom(20);
+                if (stop == 0){
+                    int stopPause = 2000+getRandom(5000);
+                    mouseSerf(new Point(172,169),new Point(1022,710),stopPause);
+                    //Thread.sleep(stopPause);
+                }
+                Thread.sleep(pause);
+                Robot r = new Robot();
+                r.mouseWheel((int)Math.signum(cnt));
+            } catch (Exception ex){ex.printStackTrace();}
+            absCnt--;
         }
     }
 
@@ -552,8 +616,8 @@ public class UserRobot {
             r.keyRelease(KeyEvent.VK_CONTROL);
             r.keyRelease(KeyEvent.VK_T);
             sleep(2*this.timeout);
-            mouseMove(256,60);
-            openAndTransfer(new Point(256,60));
+            mouseMove(276,45);
+            openAndTransfer(new Point(276,45));
             sleep(this.timeout);
             r.keyPress(KeyEvent.VK_CONTROL);
             sleep(this.timeout);
@@ -580,6 +644,7 @@ public class UserRobot {
     }
 
     public void openAndTransfer(Point point){
+        mouseMove(point.x,point.y);
         int dx = getRandom(9)-4;
         int dy = getRandom(9)-4;
         mouseMove(point.x, point.y);
@@ -587,18 +652,28 @@ public class UserRobot {
         mousePress(point.x+dx, point.y+dy, InputEvent.BUTTON1_MASK);
     }
 
+    public void randomClick(Point p1, Point p2){
+        int x = p1.x + getRandom(p2.x - p1.x);
+        int y = p1.y + getRandom(p2.y - p1.y);
+        openAndTransfer(new Point(x,y));
+    }
+
     public ArrayList<Point> getPoints(String query){
         this.pointToSite = new HashMap<Point, String>();
         Point[] points = new Point[4];
-        points[0]=new Point(230,206);
-        points[1]=new Point(230,332);
-        points[2]=new Point(230,455);
-        points[3]=new Point(230,580);
+        //points[0]=new Point(213,172);
+        //points[1]=new Point(213,300);
+        //points[2]=new Point(217,385);
+        //points[3]=new Point(205,511);
+        points[0]=new Point(127,151);
+        points[1]=new Point(132,279);
+        points[2]=new Point(135,406);
+        points[3]=new Point(132,490);
         ArrayList<Point> ret = new ArrayList<Point>();
         try {
             String queryText = "https://yandex.ru/search/?text="+query + "&rstr=-1";
             //downloadFiles("https://yandex.ru/search/?text=miele%20aaa%20%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82%20%D1%81%D1%82%D0%B8%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D1%85%20%D0%BC%D0%B0%D1%88%D0%B8%D0%BD%20miele&lr=213&rstr=-1&rnd=82767","e:/direct.html",100);
-            File input = new File("C:\\Users\\Максим\\Downloads\\page.html");
+            File input = new File("C:\\Documents and Settings\\ххх\\Мои документы\\Downloads\\page.html");
             Document doc = Jsoup.parse(input, "utf8", "http://example.com/");
             System.out.println(doc.text());
             int j = 0;
@@ -609,7 +684,7 @@ public class UserRobot {
                     System.out.println(text);
 
                     if (j==0 && !text.contains("miele-m.ru") && !text.contains("miele-servicebt.ru")){
-                        if (i < 3) {
+                        if (i < 4) {
                             ret.add(points[i]);
                             if (text.contains("mirrestart.ru")) this.pointToSite.put(points[i],"mirrestart.ru");
                             if (text.contains("service-restart.ru")) this.pointToSite.put(points[i],"service-restart.ru");
@@ -706,46 +781,113 @@ public class UserRobot {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
     }
 
+    public void scroll(){
+        int cnt = getRandom(20);
+        mouseWheel(cnt);
+        mouseWheel(cnt*(-1));
+    }
+
 
 
     public void start(){
         ArrayList<String> queries = getQueries();
         int j = 0;
         for (String query: queries){
-            clearHistory();
-            openAndTransfer(new Point(902,63)); //Переключение proxy
+            int maxJ = 3+getRandom(2);
+            if (j >= maxJ) {
+                cCleaner();//чистка браузера
+                sleep(20 * timeout);
+
+                openAndTransfer(CsC.BUTTON_MODEM_OPEN);//запуск модема
+                sleep(1500);
+                openAndTransfer(CsC.BUTTON_MODEM_CONNECT);//отключение
+                sleep(5000);
+                openAndTransfer(CsC.BUTTON_MODEM_CONNECT);//включение
+                sleep(5000);
+
+                sleep(20 * timeout);
+
+                openAndTransfer(CsC.BUTTON_CHROME_START);//запуск chrome
+                sleep(30 * this.timeout);
+                //newTab();
+                //newTab();
+                //newTab();
+            /* Ввод поискового запроса START*/
+                input(query);//вввод поискового запроса
+                sleep(6 * timeout);
+                int rand = getRandom(2);
+                if (rand == 0) {
+                    inputChar(KeyEvent.VK_ENTER);
+                } else {
+                    randomClick(CsC.BUTTON_YANDEX_SEARCH_FIRST_1,CsC.BUTTON_YANDEX_SEARCH_FIRST_2);
+                }
+                sleep(10 * timeout);
+            /* Ввод поискового запроса END*/
+                randomClick(CsC.BUTTON_YANDEX_DEFAULT_SEARCH_NO_1,CsC.BUTTON_YANDEX_DEFAULT_SEARCH_NO_2); //Отказ сделать Яндекс основным поиском
+                sleep(2 * timeout);
+            /* Повторный поиск START*/
+                rand = getRandom(2);
+                if (rand == 0) {
+                    randomClick(CsC.BUTTON_YANDEX_SEARCH_BAR_1, CsC.BUTTON_YANDEX_SEARCH_BAR_2);
+                    sleep(timeout);
+                    inputChar(KeyEvent.VK_ENTER);
+                } else {
+                    randomClick(CsC.BUTTON_YANDEX_SEARCH_SECOND_1, CsC.BUTTON_YANDEX_SEARCH_SECOND_2);
+                }
+            /* Повторный поиск END*/
+
+                sleep(10 * timeout);
+                j = 0;
+                clearText();
+            }
+            scroll();
+/*
+            //openAndTransfer(new Point(62, 532));
+            randomClick(new Point(62,532), new Point(70,600));
+            sleep(5000);
+            //clearHistory();
+
+            //openAndTransfer(new Poi020nt(902,63)); //Переключение proxy
             sleep(1000);
 
-            openAndTransfer(new Point(667,139));
-            sleep(500);
-            openAndTransfer(new Point(301,210));
-            sleep(500);
-            input("Москва и ");
-            sleep(500);
-            inputChar(KeyEvent.VK_ENTER); //13.Enter
-            sleep(500);
-            openAndTransfer(new Point(667,139));
+            //openAndTransfer(new Point(661,94));//расширенный поиск
+            //sleep(500);
+            //openAndTransfer(new Point(292,164));//смена региона
+            //sleep(500);
+            //input("Москва и ");
+            //sleep(500);
+            //inputChar(KeyEvent.VK_ENTER); //13.Enter
+            //sleep(500);
+            //openAndTransfer(new Point(661,94));//расширенный поиск
             sleep(500);
 
-            mouseMove(338, 134);
-            mouse1Press(338, 134);
+            mouseMove(321, 95);
+            //openAndTransfer(new Point(321, 95));//строка поиска яндекс
+            randomClick(new Point(140,87), new Point(578,107));//строка поиска яндекс
             clearText();
             input(query);
             inputChar(KeyEvent.VK_ENTER); //13.Enter
+            sleep(2000);
+            //openAndTransfer(new Point(720, 96));//кнопка поиска
+            randomClick(new Point(684,82), new Point(755,112));//кнопка поиска
+            sleep(10*timeout);
+            scroll();
+
             //ur.input("ABCDEFGHIJKLMNOPQRSTYVWXYZ");
-            sleep(20*this.timeout);
+            */
+            sleep(10*this.timeout);
             savePage();
             ArrayList<Point> points = getPoints(query);
-
 
             for (Point p: points){
                 sleep(2*this.timeout);
                 //open(p);
-                openAndTransfer(p);
+                //openAndTransfer(p);
+                randomClick(p,new Point(p.x+350, p.y+15));
 
                 Random r = new Random();
                 int pause = r.nextInt(40);
-                sleep(20 * this.timeout + pause * this.timeout);
+                mouseSerf(CsC.BUTTON_DEFAULT_SERF_AREA_1,CsC.BUTTON_DEFAULT_SERF_AREA_2,10 * this.timeout + pause * this.timeout);
 
                 String site = this.pointToSite.get(p);
                 if (site != null) {
@@ -755,37 +897,109 @@ public class UserRobot {
 
                 }
 
-                mouseWheel(4);
-                sleep(this.timeout);
-                mouseWheel(4);
-                sleep(this.timeout);
-                mouseWheel(4);
-                sleep(this.timeout);
-                mouseWheel(-4);
-                sleep(this.timeout);
-                mouseWheel(-4);
-                sleep(this.timeout);
-                mouseWheel(-4);
-                sleep(this.timeout);
-                openAndTransfer(new Point(268,333));
+                scroll();
+                /* Эмуляция стандартного поведения на странице START*/
+                int randClick = getRandom(3);
+                if (randClick == 0) {
+                    randomClick(new Point(71, 110), new Point(1034, 589));
+                    //openAndTransfer(new Point(268,333));
+                    sleep(4 * this.timeout);
+                }
+                randomClick(new Point(71, 110), new Point(1034, 589));
                 sleep(4*this.timeout);
-                openAndTransfer(new Point(863,248));
-                sleep(4*this.timeout);
-                openAndTransfer(new Point(231,860));
+                randomClick(new Point(71, 110), new Point(1034, 589));
 
-                sleep(20 * this.timeout);
+                mouseSerf(new Point(172,169),new Point(1022,710),40 * this.timeout);
+                /* Эмуляция стандартного поведения на странице END*/
 
                 closeTab();
                 sleep(4*this.timeout);
             }
             j++;
-            if (j > 0) {
-
-                newTab();
-                j = 0;
-            }
-
         }
+    }
+
+    public void textSelection(Point p1,Point p2){
+        try {
+            int d1x = getRandom(9)-4;
+            int d1y = getRandom(9)-4;
+            int d2x = getRandom(9)-4;
+            int d2y = getRandom(9)-4;
+            //sleep(10000);
+            Robot r = new Robot();
+            //Point p1 = new Point(568,935);
+            //Point p2 = new Point(733,939);
+            //Point p3 = new Point(645,299);
+            //openAndTransfer(new Point(561,701));
+            r.mouseMove(p1.x+d1x, p2.y+d1y);
+            sleep(1500);
+            r.mousePress(InputEvent.BUTTON1_MASK);
+            sleep(2000);
+            r.mouseMove(p2.x+d2x, p2.y+d2y);
+            sleep(500);
+            r.mouseRelease(InputEvent.BUTTON1_MASK);
+            sleep(2000);
+
+            //r.mousePress(InputEvent.BUTTON1_MASK);
+            //r.mouseRelease(InputEvent.BUTTON1_MASK);
+            //Thread.sleep(5000);
+
+            r.keyPress(KeyEvent.VK_CONTROL);
+            sleep(500);
+            r.keyPress(KeyEvent.VK_C);
+            r.keyRelease(KeyEvent.VK_CONTROL);
+            sleep(100);
+            r.keyRelease(KeyEvent.VK_C);
+        } catch (Exception ex){ex.printStackTrace();}
+    }
+
+    public int go(RobotPoint startPoint){
+        int sumary = 0;
+        try {
+            if (startPoint != null) {
+                System.out.println("STEP"+steps+"SPEED"+speed);
+                steps++;
+                if (steps > 100) {
+                    speed = speed + getRandom(3)-1;
+                    steps = 0;
+                }
+                if (speed < 0) speed = 0;
+                if (speed > 2) speed = 2;
+                //if (counter <= 0) {
+                int pause = speed+ getRandom(2);
+                Thread.sleep(pause);
+                sumary = sumary + pause;
+                //counter = speed;
+                //}
+                //counter--;
+                Robot r = new Robot();
+                r.mouseMove(startPoint.point.x, startPoint.point.y);
+                sumary = sumary + go(startPoint.next);
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return sumary;
+    }
+
+    public RobotPoint generateTrace(RobotPoint p){
+        if (getDistance(p.point,p.next.point)<3) return p;
+        else {
+            RobotPoint next = p.next;
+            int dx = getRandom(Math.abs(p.point.x - p.next.point.x)/4+1);
+            int dy = getRandom(Math.abs(p.point.y - p.next.point.y)/4+1);
+            int nx = Math.min(p.point.x,p.next.point.x)+dx+Math.abs(p.point.x - p.next.point.x)*3/8;
+            int ny = Math.min(p.point.y,p.next.point.y)+dy+Math.abs(p.point.y - p.next.point.y)*3/8;
+            Point newPoint = new Point(nx,ny);
+            RobotPoint newRobotPoint = new RobotPoint(newPoint);
+            newRobotPoint.next = next;
+            p.next = generateTrace(newRobotPoint);
+            return generateTrace(p);
+        }
+    }
+
+    public double getDistance(Point p1,Point p2){
+        return Math.pow(Math.pow(p1.x-p2.x,2)+Math.pow(p1.y-p2.y,2),0.5);
     }
 
     public void sceneMieleRu(){
@@ -793,15 +1007,15 @@ public class UserRobot {
         System.out.println("Random="+rand);
         //rand = 1;
         if (rand == 0) {
-            openAndTransfer(new Point(40, 340));
+            openAndTransfer(new Point(180, 302));
             sleep(4000);
-            openAndTransfer(new Point(129, 341));
+            openAndTransfer(new Point(262, 302));
             sleep(4000);
-            openAndTransfer(new Point(231, 345));
+            openAndTransfer(new Point(353, 302));
             sleep(4000);
-            openAndTransfer(new Point(371, 342));
+            openAndTransfer(new Point(500, 302));
             sleep(4000);
-            openAndTransfer(new Point(554, 347));
+            openAndTransfer(new Point(680, 303));
             sleep(4000);
             try {
                 Robot r = new Robot();
@@ -818,7 +1032,7 @@ public class UserRobot {
             }
         }
         if (rand == 1){
-            openAndTransfer(new Point(724, 344));
+            openAndTransfer(new Point(838, 301));
             sleep(4000);
             String input = getRandomString();
             input(input);
@@ -826,64 +1040,108 @@ public class UserRobot {
     }
 
     public void sceneServiceRestartRu(){
-        int cnt = getRandom(6);
-        openAndTransfer(new Point(400,261));
+        int rand = getRandom(2);
+        System.out.println("sceneServiceRestartRu.RAND="+rand);
+        if (rand == 0){
+            textSelection(new Point(410,83),new Point(545,79));
+        } else {
+            textSelection(new Point(408,110),new Point(548,105));
+        }
+        sleep(1000);
+        randomClick(new Point(26,80),new Point(567,227));
+
+        scroll();
+        sleep(4*timeout);
+
+        int r2 = getRandom(2);
+        if (r2==0) {
+            int cnt = getRandom(6);
+            openAndTransfer(new Point(726, 228));
+            sleep(4000);
+            openAndTransfer(new Point(700, 270 + 25 * cnt));
+            scroll();
+        } else {
+            randomClick(new Point(576,261), new Point(752,416));
+            sleep(2000);
+            scroll();
+        }
+        //openAndTransfer(new Point(644,228));
+        randomClick(new Point(620,220),new Point(672,231));
+        //mouseWheel(100);
+        sleep(2000);
+        scroll();
+        sleep(2000);
         sleep(4000);
-        openAndTransfer(new Point(391,302+28*cnt));
-        sleep(4000);
-        mouseWheel(100);
-        sleep(2000);
-        mouseWheel(100);
-        sleep(2000);
-        mouseWheel(100);
-        sleep(2000);
-        mouseWheel(100);
-        sleep(2000);
-        mouseWheel(-100);
-        sleep(2000);
-        mouseWheel(-100);
-        sleep(2000);
-        mouseWheel(-100);
-        sleep(2000);
-        mouseWheel(-100);
-        sleep(2000);
-        openAndTransfer(new Point(477,260));
-        mouseWheel(100);
-        sleep(2000);
-        mouseWheel(-100);
-        sleep(2000);
-        sleep(4000);
+
 
     }
 
     public void sceneMirRestartRu(){
-        openAndTransfer(new Point(56,459));
-        sleep(2000);
-        openAndTransfer(new Point(94,537));
-        sleep(2000);
-        openAndTransfer(new Point(113,610));
-        sleep(2000);
-        openAndTransfer(new Point(775,459));
-        sleep(2000);
-        openAndTransfer(new Point(580,465));
-        sleep(2000);
-        input("ремонт варочной панели");
-        sleep(2000);
-        inputChar(KeyEvent.VK_ENTER);
-        sleep(4000);
-        try {
-            Robot r = new Robot();
-            r.mouseWheel(100);
+        int rand = getRandom(2);
+        int selection = getRandom(2);
+        System.out.println("sceneMirRestartRu.Rand="+rand);
+        if (selection == 0 ){
+            textSelection(new Point(12,100),new Point(124,103));
+        } else {
+            textSelection(new Point(12,130),new Point(120,127));
+        }
+        sleep(1500);
+        randomClick(new Point(385,192),new Point(770,393));
+        sleep(1000);
+        scroll();
+        sleep(4*timeout);
+        if (rand ==0) {
+            openAndTransfer(new Point(170, 420));
             sleep(2000);
-            r.mouseWheel(100);
+            openAndTransfer(new Point(187, 460));
             sleep(2000);
-            r.mouseWheel(100);
+            scroll();
             sleep(2000);
-            r.mouseWheel(100);
+            openAndTransfer(new Point(170, 420));
             sleep(2000);
-        } catch (Exception ex){
-            ex.printStackTrace();
+            openAndTransfer(new Point(177, 494));
+            sleep(2000);
+            scroll();
+            sleep(2000);
+            openAndTransfer(new Point(170, 420));
+            sleep(2000);
+            openAndTransfer(new Point(174, 529));
+            sleep(2000);
+            scroll();
+            sleep(2000);
+            openAndTransfer(new Point(170, 420));
+            sleep(2000);
+            openAndTransfer(new Point(177, 565));
+            sleep(2000);
+            scroll();
+            sleep(2000);
+        } else {
+            openAndTransfer(new Point(1233, 419));
+            sleep(2000);
+            openAndTransfer(new Point(1000, 419));
+            sleep(2000);
+            input(getRandomString());
+            sleep(2000);
+            inputChar(KeyEvent.VK_ENTER);
+            sleep(4000);
+            scroll();
+        }
+    }
+
+    public class RobotPoint{
+        public RobotPoint next;
+        public Point point;
+
+        public RobotPoint(Point point){
+            this.point = point;
         }
 
+        public RobotPoint getNext() {
+            return next;
+        }
+
+        public void setNext(RobotPoint next) {
+            this.next = next;
+        }
     }
 }
